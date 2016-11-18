@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Parrot Talk</string>
+    <string name="action_settings">Settings</string>
+    <string name="command">Voice Command</string>
+</resources>

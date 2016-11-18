@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.paul.parrottalk.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textSize="36sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/parrot_img"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:id="@+id/imageView"
+        android:cropToPadding="false"
+        android:adjustViewBounds="true"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:id="@+id/statusView"
+        android:cropToPadding="false"
+        android:adjustViewBounds="true" />
+
+    <Button
+        android:text="@string/command"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:id="@+id/commandButton"
+        android:drawableStart="@android:drawable/ic_btn_speak_now"
+        android:layout_below="@+id/statusView"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
+        android:paddingLeft="30dip"
+        android:paddingRight="30dip"/>
+
+
+</RelativeLayout>
