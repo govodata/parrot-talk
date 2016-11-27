@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/ScrollView01"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/content_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.govodata.paul.parrottalk.SettingsActivity"
+        tools:showIn="@layout/activity_settings">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="76dp"
+            android:id="@+id/defaultNameTextView"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:fontFamily="monospace" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/defaultNameTextView"
+            android:inputType="textPersonName"
+            android:hint="@string/queue_name_text"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:ems="14"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:drawableEnd="@android:drawable/ic_delete"
+            android:id="@+id/queueEditText" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/name_string"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:ems="14"
+            android:layout_below="@+id/queueEditText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="26dp"
+            android:drawableEnd="@android:drawable/ic_delete"
+            android:id="@+id/nameEditText" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="@string/key_string"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:ems="14"
+            android:layout_below="@+id/nameEditText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="26dp"
+            android:drawableEnd="@android:drawable/ic_delete"
+            android:id="@+id/keyEditText" />
+
+        <Button
+            android:text="@string/enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:id="@+id/enterButton"
+            android:background="@color/colorPrimary"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:textSize="20sp"
+            android:layout_below="@+id/keyEditText"
+            android:layout_alignStart="@+id/keyEditText"
+            android:layout_alignEnd="@+id/keyEditText" />
+
+    </RelativeLayout>
+</ScrollView>

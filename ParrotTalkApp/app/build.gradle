@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
-        applicationId "com.example.paul.parrottalk"
+        applicationId "com.govodata.paul.parrottalk"
         minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
@@ -17,11 +17,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    repositories {
+        // Repository contains azure-storage-android
+        mavenCentral()
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile fileTree(dir: 'libs/commons-codec-1.10', include: ['*.jar'])
+
+    // Apache Commons Codec
+    // Used for Metaphone in the Controller class
+    // https://commons.apache.org/proper/commons-codec/
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
+
+    // Microsoft Azure Storage Client SDK for Android
+    // Used for Azure Queue storage in the AzureQueue class
+    // https://github.com/azure/azure-storage-android
+    compile 'com.microsoft.azure.android:azure-storage-android:0.8.0'
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
