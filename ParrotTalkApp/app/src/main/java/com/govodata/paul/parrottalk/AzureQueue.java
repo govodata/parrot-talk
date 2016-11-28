@@ -34,7 +34,7 @@ class AzureQueue {
         }
     }
 
-    private class CreateQueue extends AsyncTask<String, String, String> {
+    private final class CreateQueue extends AsyncTask<String, String, String> {
 
         Exception exception = null;
 
@@ -64,7 +64,7 @@ class AzureQueue {
         }
     }
 
-    private class AddMessagesToQueue extends AsyncTask<String, String, String> {
+    private final class AddMessagesToQueue extends AsyncTask<String, String, String> {
 
         StorageException exception = null;
 

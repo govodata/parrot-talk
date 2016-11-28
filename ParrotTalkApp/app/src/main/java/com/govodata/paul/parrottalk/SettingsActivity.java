@@ -1,10 +1,7 @@
 package com.govodata.paul.parrottalk;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends ParrotTalkAppCompatActivity {
 
     private TextView defaultNameTextView;
     private EditText queueEditText, nameEditText, keyEditText;
@@ -105,15 +102,27 @@ public class SettingsActivity extends AppCompatActivity {
         }
         // Connect to azure.
         else {
+            // Convert to proper name format:
+            // lowercase letters and numbers.
+            final String accountName = nameEditText.getText().toString()
+                    .toLowerCase()
+                    .replaceAll("[^\\w\\d]", "");
+
+            // Remove spaces from key.
+            final String accountKey = keyEditText.getText().toString()
+                    .replaceAll(" ", "");
+
+            // Create connection string.
             final String storageConnectionString = "DefaultEndpointsProtocol=https;"
-                    + "AccountName=" + nameEditText.getText().toString()
-                    + ";AccountKey=" + keyEditText.getText().toString();
+                    + "AccountName=" + accountName
+                    + ";AccountKey=" + accountKey;
 
             connectAzureQueue(storageConnectionString);
         }
     }
 
-    private void connectAzureQueue(final String storageConnectionString) {
+    @Override
+    void connectAzureQueue(final String storageConnectionString) {
         // Save account name.
         setStorageAccountName(nameEditText.getText().toString());
         try {
@@ -121,18 +130,19 @@ public class SettingsActivity extends AppCompatActivity {
             if (queueEditText.getText().toString().isEmpty()) {
                 // Set saved queue name to empty.
                 setQueueName("");
-                MainActivity.setAzureQueue(storageConnectionString);
+                setAzureQueue(storageConnectionString);
             }
             // User entered queue name.
             else {
-                // Convert to proper name format, save queue name
+                // Convert to proper name format:
+                // lowercase letters, numbers, and dash
                 final String queueName = queueEditText.getText().toString()
                         .toLowerCase()
                         .replaceAll("[^\\w\\d-]", "");
                 // Save queue name.
                 setQueueName(queueName);
                 // Connect to Azure.
-                MainActivity.setAzureQueue(storageConnectionString, queueName);
+                setAzureQueue(storageConnectionString, queueName);
             }
             // Save connection string.
             setStorageConnectionString(storageConnectionString);
@@ -195,47 +205,5 @@ public class SettingsActivity extends AppCompatActivity {
     private void clearButton(final EditText editText, final CharSequence hint) {
         editText.setHint(hint);
         clearButton(editText);
-    }
-
-    private String getQueueName() {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.connection_settings), Context.MODE_PRIVATE);
-        return sharedPref.getString(getString(R.string.queue_name_string), "");
-    }
-
-    private String getStorageAccountName() {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.connection_settings), Context.MODE_PRIVATE);
-        return sharedPref.getString(getString(R.string.account_name_string), "");
-    }
-
-    private String getStorageConnectionString() {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.connection_settings), Context.MODE_PRIVATE);
-        return sharedPref.getString(getString(R.string.storage_connection_string), "");
-    }
-
-    private void setQueueName(final String queueName) {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.connection_settings), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.queue_name_string), queueName);
-        editor.apply();
-    }
-
-    private void setStorageAccountName(final String storageConnectionString) {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.connection_settings), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.account_name_string), storageConnectionString);
-        editor.apply();
-    }
-
-    private void setStorageConnectionString(final String storageConnectionString) {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.connection_settings), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.storage_connection_string), storageConnectionString);
-        editor.apply();
     }
 }

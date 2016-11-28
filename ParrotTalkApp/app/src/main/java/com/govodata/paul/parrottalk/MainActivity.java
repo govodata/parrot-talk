@@ -1,12 +1,9 @@
 package com.govodata.paul.parrottalk;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +17,7 @@ import com.microsoft.azure.storage.StorageException;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ParrotTalkAppCompatActivity {
 
     private static final short SPEECH_REQUEST = 1;
 
@@ -28,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Controller class for parsing speech input.
     private Controller controller = new Controller();
-
-    // AzureQueue class for messaging.
-    private static AzureQueue azureQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         statusTextView = (TextView) findViewById(R.id.statusView);
 
-        connectAzureQueue();
+        connectAzureQueue(getStorageConnectionString());
 
         Button commandButton = (Button) findViewById(R.id.commandButton);
         commandButton.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     statusTextView.setText(s);
                     // Add message to Azure queue.
                     try {
-                        azureQueue.addMessages(s);
+                        addMessagesToAzureQueue(s);
                     }
                     catch (StorageException e) {
                         Toast.makeText(MainActivity.this,
@@ -138,14 +132,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Connects to Azure Storage with saved storage connection string and queue name.
-    private void connectAzureQueue() {
-        final String storageConnectionString = getStorageConnectionString();
-
+    @Override
+    void connectAzureQueue(final String storageConnectionString) {
         // Bring up settings activity if no storage connection string is saved.
         if (storageConnectionString.isEmpty()) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
+        // Connect to Azure Storage.
         else {
             final String queueName = getQueueName();
             try {
@@ -160,25 +154,5 @@ public class MainActivity extends AppCompatActivity {
                         e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    static void setAzureQueue(final String storageConnectionString) throws Exception {
-        azureQueue = new AzureQueue(storageConnectionString);
-    }
-
-    static void setAzureQueue(final String storageConnectionString, final String queueName) throws Exception {
-        azureQueue = new AzureQueue(storageConnectionString, queueName);
-    }
-
-    private String getQueueName() {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.connection_settings), Context.MODE_PRIVATE);
-        return sharedPref.getString(getString(R.string.queue_name_string), "");
-    }
-
-    private String getStorageConnectionString() {
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.connection_settings), Context.MODE_PRIVATE);
-        return sharedPref.getString(getString(R.string.storage_connection_string), "");
     }
 }
