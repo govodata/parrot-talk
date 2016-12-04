@@ -29,7 +29,6 @@ module.exports = {
 					console.log("• doing land");
 					mission.land();
 					break;
-					break;
 
 				case /^altitude/.test(flight_command):
 					console.log("• doing altitude");
