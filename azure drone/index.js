@@ -1,6 +1,6 @@
 
-process.env.AZURE_STORAGE_ACCOUNT = 'parrottalkstorage';
-process.env.AZURE_STORAGE_ACCESS_KEY = '2xBSgM7lGINalGRVz/5IgCWqQFDSdjG6lui2N+q9YIhqe/xE2OYY8V+DH0YDV/PzDQgZijZmBDDBuji4zXZmXA==';
-var queueName = "taskqueue";
+process.env.AZURE_STORAGE_ACCOUNT = 'Enter your storage account here';
+process.env.AZURE_STORAGE_ACCESS_KEY = 'Enter your access key here';
+var queueName = "enter your queue name here";
 
 exports.queueName = queueName;
