@@ -1,11 +1,12 @@
 var azure = require('azure-storage');
+var acct = require('../index');
+//process.env.AZURE_STORAGE_ACCOUNT = '';
+//process.env.AZURE_STORAGE_ACCESS_KEY = '';
+//var queueName = "";
 
-process.env.AZURE_STORAGE_ACCOUNT = 'Your storage name';
-process.env.AZURE_STORAGE_ACCESS_KEY = 'Your access key';
-
-
+var queueName = acct.queueName;
 var queueService = azure.createQueueService();
-var queueName = "taskqueue";
+
 
 
 queueService.createQueueIfNotExists(queueName, function(error) {
