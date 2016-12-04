@@ -17,76 +17,71 @@ var exiting = false;
 module.exports = {
 	flight_cmd: function(flight_command, distance){
 		console.log(flight_command);
-			
-			//flight_command = b;
-			//b=null;
-			
+
 			switch (true){
-				
+
 				case /^takeoff/.test(flight_command):
 					console.log("• doing takeoff");
 					mission.takeoff();
-					//flyDrone();
-					//setTimeout(function1, 1000);
 					break;
-				
-				case /^clockwise/.test(flight_command):
-					console.log("• doing clockwise");
-					mission.cw(distance);
-					//flyDrone();
-					//setTimeout(function1, 1000);
-					break;
-				
-				case /^counterclockwise/.test(flight_command):
-					console.log("• counterclockwise");
-					mission.ccw(distance);
-					//setTimeout(function1, 1000);
-					break;
-				
+
 				case /^land/.test(flight_command):
 					console.log("• doing land");
 					mission.land();
-					//flyDrone();
 					break;
-				
+					break;
+
 				case /^altitude/.test(flight_command):
 					console.log("• doing altitude");
 					mission.altitude(distance);
-					//setTimeout(function1, 1000);
 					break;
-					
-				case /^forward/.test(flight_command):
-					console.log("• doing forward");
-					mission.forward(distance);
-					//setTimeout(function1, 1000);
-					break;
-					
-				case /^backward/.test(flight_command):
-					console.log("• doing backward");
-					mission.backward(distance);
-					//setTimeout(function1, 1000);
-					break;
-				
-				case /^left/.test(flight_command):
-					console.log("• doing left");
-					mission.left(distance);
-					//setTimeout(function1, 1000);
-					break;
-					
-				case /^right/.test(flight_command):
-					console.log("• doing right");
-					mission.right(distance);
-					//setTimeout(function1, 1000);
-					break;
-					
+
 				case /^yaw/.test(flight_command):
 					console.log("• doing right");
 					mission.yaw(distance);
-					//setTimeout(function1, 1000);
+					break;
+
+				case /^clockwise/.test(flight_command):
+					console.log("• doing clockwise");
+					mission.cw(distance);
+					break;
+
+				case /^counterclockwise/.test(flight_command):
+					console.log("• counterclockwise");
+					mission.ccw(distance);
+
+				case /^forward/.test(flight_command):
+					console.log("• doing forward");
+					mission.forward(distance);
+					break;
+
+				case /^backward/.test(flight_command):
+					console.log("• doing backward");
+					mission.backward(distance);
+					break;
+
+				case /^left/.test(flight_command):
+					console.log("• doing left");
+					mission.left(distance);
+					break;
+
+				case /^right/.test(flight_command):
+					console.log("• doing right");
+					mission.right(distance);
+					break;
+
+				case /^up/.test(flight_command):
+					console.log("• doing up");
+					mission.up(distance);
+					break;
+
+				case /^down/.test(flight_command):
+					console.log("• doing down");
+					mission.down(distance);
 					break;
 
 			}
-			
+
 	}
-	
+
 }
