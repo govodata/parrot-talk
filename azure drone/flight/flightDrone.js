@@ -1,13 +1,7 @@
 var autonomy = require('ardrone-autonomy');
 var mission  = autonomy.createMission();
 
-module.exports = {
-	flight_cmd: function(flight_command, distance){
-		console.log(flight_command);
-			
-			//flight_command = b;
-			//b=null;
-			var exiting = false;
+var exiting = false;
 			process.on('SIGINT', function() {
 				if (exiting) {
 					process.exit(0);
@@ -20,6 +14,13 @@ module.exports = {
 					});
 				}
 			});
+module.exports = {
+	flight_cmd: function(flight_command, distance){
+		console.log(flight_command);
+			
+			//flight_command = b;
+			//b=null;
+			
 			switch (true){
 				
 				case /^takeoff/.test(flight_command):
